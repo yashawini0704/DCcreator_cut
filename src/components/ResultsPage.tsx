@@ -118,8 +118,8 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ films, songs }) => {
               <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 rounded-2xl p-8 border border-amber-500/30">
                 <div className="text-center mb-6">
                   <div className="text-2xl font-bold text-amber-400 mb-2">Best Film</div>
-                  <div className="text-4xl font-bold text-white">{sortedFilms[0].title}</div>
-                  <div className="text-slate-300">by {sortedFilms[0].director}</div>
+                  <div className="text-4xl font-bold text-white">{sortedFilms[0].film_id}</div>
+                  <div className="text-slate-300">from {sortedFilms[0].center}</div>
                   <div className="text-amber-400 font-semibold mt-2">{sortedFilms[0].votes} votes</div>
                 </div>
               </div>
@@ -129,8 +129,8 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ films, songs }) => {
               <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl p-8 border border-purple-500/30">
                 <div className="text-center mb-6">
                   <div className="text-2xl font-bold text-purple-400 mb-2">Best Song</div>
-                  <div className="text-4xl font-bold text-white">{sortedSongs[0].title}</div>
-                  <div className="text-slate-300">by {sortedSongs[0].artist}</div>
+                  <div className="text-4xl font-bold text-white">{sortedSongs[0].song_id}</div>
+                  <div className="text-slate-300">from {sortedSongs[0].center}</div>
                   <div className="text-purple-400 font-semibold mt-2">{sortedSongs[0].votes} votes</div>
                 </div>
               </div>

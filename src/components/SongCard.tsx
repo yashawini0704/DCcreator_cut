@@ -37,23 +37,26 @@ const SongCard: React.FC<SongCardProps> = ({
       )}
       
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-xl font-bold text-white line-clamp-2 flex-1 mr-4">{song.title}</h3>
+        <h3 className="text-xl font-bold text-white line-clamp-2 flex-1 mr-4">{song.song_id}</h3>
         <span className="text-xs text-slate-400 font-mono bg-slate-700 px-2 py-1 rounded shrink-0">
-          {song.id}
+          {song.center}
         </span>
       </div>
       
       <div className="space-y-2 mb-4">
-        <div className="flex items-center space-x-2 text-slate-300">
-          <Disc className="w-4 h-4" />
-          <span className="text-sm">{song.artist}</span>
-        </div>
-        {song.album && (
-          <div className="text-sm text-slate-400 ml-6">{song.album}</div>
-        )}
-        <div className="flex items-center space-x-2 text-slate-300">
-          <Clock className="w-4 h-4" />
-          <span className="text-sm">{song.duration}</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2 text-slate-300">
+            <Disc className="w-4 h-4" />
+            <span className="text-sm">Center: {song.center}</span>
+          </div>
+          <a
+            href={song.dc_song_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-amber-400 hover:text-amber-300 underline"
+          >
+            Play Song
+          </a>
         </div>
       </div>
 

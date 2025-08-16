@@ -1,19 +1,17 @@
 export interface Film {
   id: string;
-  title: string;
-  director: string;
-  year: number;
-  poster?: string;
+  film_id: string;
+  center: string;
+  dc_film_url: string;
   votes: number;
   favorites: number;
 }
 
 export interface Song {
   id: string;
-  title: string;
-  artist: string;
-  album?: string;
-  duration: string;
+  song_id: string;
+  center: string;
+  dc_song_url: string;
   votes: number;
   favorites: number;
 }

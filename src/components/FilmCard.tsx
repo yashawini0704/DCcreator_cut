@@ -47,20 +47,26 @@ const FilmCard: React.FC<FilmCardProps> = ({
       
       <div className="p-6">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-xl font-bold text-white line-clamp-2">{film.title}</h3>
+          <h3 className="text-xl font-bold text-white line-clamp-2">{film.film_id}</h3>
           <span className="text-xs text-slate-400 font-mono bg-slate-700 px-2 py-1 rounded">
-            {film.id}
+            {film.center}
           </span>
         </div>
         
         <div className="space-y-2 mb-4">
-          <div className="flex items-center space-x-2 text-slate-300">
-            <User className="w-4 h-4" />
-            <span className="text-sm">{film.director}</span>
-          </div>
-          <div className="flex items-center space-x-2 text-slate-300">
-            <Calendar className="w-4 h-4" />
-            <span className="text-sm">{film.year}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-slate-300">
+              <User className="w-4 h-4" />
+              <span className="text-sm">Center: {film.center}</span>
+            </div>
+            <a
+              href={film.dc_film_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-amber-400 hover:text-amber-300 underline"
+            >
+              View Film
+            </a>
           </div>
         </div>
 
