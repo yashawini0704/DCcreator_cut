@@ -27,6 +27,10 @@ const VotingPage: React.FC<VotingPageProps> = ({
 }) => {
   const totalVotes = userVotes.films.size + userVotes.songs.size;
   const totalFavorites = userFavorites.films.size + userFavorites.songs.size;
+  
+  // Check if user has voted in each category
+  const hasVotedForFilm = userVotes.films.size > 0;
+  const hasVotedForSong = userVotes.songs.size > 0;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -77,7 +81,9 @@ const VotingPage: React.FC<VotingPageProps> = ({
         <div className="flex items-center space-x-3 mb-8">
           <FilmIcon className="w-8 h-8 text-amber-400" />
           <h2 className="text-3xl font-bold text-white">Films</h2>
-          <div className="text-slate-400">({userVotes.films.size}/{films.length} voted)</div>
+          <div className="text-slate-400">
+            {hasVotedForFilm ? '(✓ Voted)' : '(Choose 1 film)'}
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -99,7 +105,9 @@ const VotingPage: React.FC<VotingPageProps> = ({
         <div className="flex items-center space-x-3 mb-8">
           <Music className="w-8 h-8 text-amber-400" />
           <h2 className="text-3xl font-bold text-white">Soundtrack</h2>
-          <div className="text-slate-400">({userVotes.songs.size}/{songs.length} voted)</div>
+          <div className="text-slate-400">
+            {hasVotedForSong ? '(✓ Voted)' : '(Choose 1 song)'}
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

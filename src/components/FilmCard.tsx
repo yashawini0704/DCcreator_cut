@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Star, Calendar, User } from 'lucide-react';
+import { Heart, Star, User } from 'lucide-react';
 import { Film } from '../types';
 
 interface FilmCardProps {
@@ -37,11 +37,12 @@ const FilmCard: React.FC<FilmCardProps> = ({
       )}
       
       <div className="aspect-[3/4] relative overflow-hidden">
-        <img
-          src={film.poster}
-          alt={film.title}
-          className="w-full h-full object-cover"
-        />
+        <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-amber-400 mb-2">{film.film_id}</div>
+            <div className="text-slate-300">{film.center}</div>
+          </div>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
       </div>
       
