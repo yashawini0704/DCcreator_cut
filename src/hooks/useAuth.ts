@@ -5,11 +5,13 @@ import { supabase } from '../lib/supabase';
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      setIsAdmin(session?.user?.email === 'admin@gmail.com');
       setLoading(false);
     });
 
@@ -18,13 +20,49 @@ export const useAuth = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setIsAdmin(session?.user?.email === 'admin@gmail.com');
       setLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
+  const adminSignIn = async (email: string, password: string) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-auth`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success && result.isAdmin) {
+        // Create a mock user object for admin
+        const adminUser = {
+          id: 'admin-user',
+          email: 'admin@gmail.com',
+          user_metadata: { full_name: 'Administrator' },
+        } as User;
+        
+        setUser(adminUser);
+        setIsAdmin(true);
+        return { data: { user: adminUser }, error: null };
+      } else {
+        return { data: null, error: { message: result.error || 'Invalid credentials' } };
+      }
+    } catch (error) {
+      return { data: null, error: { message: 'Connection error' } };
+    }
+  };
   const signIn = async (email: string, password: string) => {
+    // Check if this is an admin login attempt
+    if (email === 'admin@gmail.com') {
+      return adminSignIn(email, password);
+    }
+    
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -46,12 +84,14 @@ export const useAuth = () => {
   };
 
   const signOut = async () => {
+    setIsAdmin(false);
     const { error } = await supabase.auth.signOut();
     return { error };
   };
 
   return {
     user,
+    isAdmin,
     loading,
     signIn,
     signUp,

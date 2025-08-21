@@ -9,7 +9,7 @@ import { useVoting } from './hooks/useVoting';
 function App() {
   const [currentView, setCurrentView] = useState<'voting' | 'results'>('voting');
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { user, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const { 
     films, 
     songs, 
@@ -20,7 +20,6 @@ function App() {
     toggleFavorite 
   } = useVoting(user?.id);
 
-  const isAdmin = user?.email === 'admin@gmail.com';
 
   // Redirect non-admin users away from results page
   useEffect(() => {
@@ -83,13 +82,13 @@ function App() {
 
   if (authLoading || votingLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-900 text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
       <Header 
         currentView={currentView} 
         onViewChange={setCurrentView}
@@ -106,6 +105,7 @@ function App() {
           onVoteFilm={handleVoteFilm}
           onVoteSong={handleVoteSong}
           onToggleFilmFavorite={handleToggleFilmFavorite}
+          isAdmin={isAdmin}
           onToggleSongFavorite={handleToggleSongFavorite}
         />
       ) : (
