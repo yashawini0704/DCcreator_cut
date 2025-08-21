@@ -37,41 +37,41 @@ const VotingPage: React.FC<VotingPageProps> = ({
       {/* Stats Section */}
       <div className="mb-12">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-white mb-4">Cast Your Vote</h2>
-          <p className="text-slate-300 text-lg">Choose your favorite DC films and soundtrack pieces</p>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Cast Your Vote</h2>
+          <p className="text-gray-600 text-lg">Choose your favorite DC films and soundtrack pieces</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-slate-800 rounded-xl p-6 text-center">
+          <div className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-200">
             <div className="flex items-center justify-center w-12 h-12 bg-blue-500 rounded-lg mx-auto mb-3">
               <FilmIcon className="w-6 h-6 text-white" />
             </div>
-            <div className="text-2xl font-bold text-white">{films.length}</div>
-            <div className="text-slate-300">Films</div>
+            <div className="text-2xl font-bold text-gray-900">{films.length}</div>
+            <div className="text-gray-600">Films</div>
           </div>
           
-          <div className="bg-slate-800 rounded-xl p-6 text-center">
+          <div className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-200">
             <div className="flex items-center justify-center w-12 h-12 bg-purple-500 rounded-lg mx-auto mb-3">
               <Music className="w-6 h-6 text-white" />
             </div>
-            <div className="text-2xl font-bold text-white">{songs.length}</div>
-            <div className="text-slate-300">Songs</div>
+            <div className="text-2xl font-bold text-gray-900">{songs.length}</div>
+            <div className="text-gray-600">Songs</div>
           </div>
           
-          <div className="bg-slate-800 rounded-xl p-6 text-center">
-            <div className="flex items-center justify-center w-12 h-12 bg-amber-500 rounded-lg mx-auto mb-3">
+          <div className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-200">
+            <div className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-lg mx-auto mb-3">
               <Users className="w-6 h-6 text-white" />
             </div>
-            <div className="text-2xl font-bold text-white">{totalVotes}</div>
-            <div className="text-slate-300">Your Votes</div>
+            <div className="text-2xl font-bold text-gray-900">{totalVotes}</div>
+            <div className="text-gray-600">Your Votes</div>
           </div>
           
-          <div className="bg-slate-800 rounded-xl p-6 text-center">
+          <div className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-200">
             <div className="flex items-center justify-center w-12 h-12 bg-red-500 rounded-lg mx-auto mb-3">
               <Heart className="w-6 h-6 text-white" />
             </div>
-            <div className="text-2xl font-bold text-white">{totalFavorites}</div>
-            <div className="text-slate-300">Favorites</div>
+            <div className="text-2xl font-bold text-gray-900">{totalFavorites}</div>
+            <div className="text-gray-600">Favorites</div>
           </div>
         </div>
       </div>
@@ -79,9 +79,9 @@ const VotingPage: React.FC<VotingPageProps> = ({
       {/* Films Section */}
       <section className="mb-16">
         <div className="flex items-center space-x-3 mb-8">
-          <FilmIcon className="w-8 h-8 text-amber-400" />
-          <h2 className="text-3xl font-bold text-white">Films</h2>
-          <div className="text-slate-400">
+          <FilmIcon className="w-8 h-8 text-blue-600" />
+          <h2 className="text-3xl font-bold text-gray-900">Films</h2>
+          <div className="text-gray-500">
             {hasVotedForFilm ? '(✓ Voted)' : '(Choose 1 film)'}
           </div>
         </div>
@@ -103,9 +103,9 @@ const VotingPage: React.FC<VotingPageProps> = ({
       {/* Songs Section */}
       <section>
         <div className="flex items-center space-x-3 mb-8">
-          <Music className="w-8 h-8 text-amber-400" />
-          <h2 className="text-3xl font-bold text-white">Soundtrack</h2>
-          <div className="text-slate-400">
+          <Music className="w-8 h-8 text-blue-600" />
+          <h2 className="text-3xl font-bold text-gray-900">Soundtrack</h2>
+          <div className="text-gray-500">
             {hasVotedForSong ? '(✓ Voted)' : '(Choose 1 song)'}
           </div>
         </div>

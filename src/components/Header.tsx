@@ -13,20 +13,22 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, onAuthClick }) => {
   const { signOut } = useAuth();
 
+  const isAdmin = user?.email === 'admin@gmail.com';
+
   const handleSignOut = async () => {
     await signOut();
   };
 
   return (
-    <header className="bg-slate-900 border-b border-slate-700">
+    <header className="bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
-              <Film className="w-8 h-8 text-amber-400" />
-              <Music className="w-8 h-8 text-amber-400" />
+              <Film className="w-8 h-8 text-blue-600" />
+              <Music className="w-8 h-8 text-blue-600" />
             </div>
-            <h1 className="text-2xl font-bold text-white">DC Creator Cut</h1>
+            <h1 className="text-2xl font-bold text-gray-900">DC Creator Cut</h1>
           </div>
           
           <nav className="flex space-x-4">
@@ -34,35 +36,37 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, onAuth
               onClick={() => onViewChange('voting')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 currentView === 'voting'
-                  ? 'bg-amber-500 text-slate-900'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
               Vote
             </button>
-            <button
-              onClick={() => onViewChange('results')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
-                currentView === 'results'
-                  ? 'bg-amber-500 text-slate-900'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              <Trophy className="w-4 h-4" />
-              <span>Results</span>
-            </button>
+            {isAdmin && (
+              <button
+                onClick={() => onViewChange('results')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
+                  currentView === 'results'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                <Trophy className="w-4 h-4" />
+                <span>Results</span>
+              </button>
+            )}
           </nav>
           
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2 text-slate-300">
+                <div className="flex items-center space-x-2 text-gray-600">
                   <User className="w-4 h-4" />
                   <span className="text-sm">{user.email}</span>
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center space-x-2 px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                   <span className="text-sm">Sign Out</span>
@@ -71,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, onAuth
             ) : (
               <button
                 onClick={onAuthClick}
-                className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-medium transition-colors"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 Sign In
               </button>
