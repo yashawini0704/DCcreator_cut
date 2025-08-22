@@ -82,13 +82,16 @@ function App() {
 
   if (authLoading || votingLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          <div className="text-white text-xl font-medium">Loading...</div>
+        </div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900">
       <Header 
         currentView={currentView} 
         onViewChange={setCurrentView}
