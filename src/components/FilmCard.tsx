@@ -22,69 +22,73 @@ const FilmCard: React.FC<FilmCardProps> = ({
   rank,
 }) => {
   return (
-    <div className="group relative bg-gradient-to-br from-slate-800/90 via-gray-800/90 to-slate-900/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:-translate-y-2 border border-white/10 hover:border-cyan-500/30">
+    <div className="group relative bg-white/80 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20 hover:border-blue-300/50">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
       {rank && (
-        <div className="absolute top-4 left-4 z-10">
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shadow-2xl backdrop-blur-sm border-2 ${
-            rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-slate-900 border-yellow-300 shadow-yellow-500/50' :
-            rank === 2 ? 'bg-gradient-to-br from-gray-300 to-gray-400 text-slate-900 border-gray-200 shadow-gray-400/50' :
-            rank === 3 ? 'bg-gradient-to-br from-amber-600 to-orange-600 text-white border-orange-400 shadow-orange-500/50' :
-            'bg-gradient-to-br from-slate-600 to-gray-700 text-white border-slate-400 shadow-slate-500/50'
+        <div className="absolute top-6 left-6 z-10">
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-lg shadow-xl backdrop-blur-sm border-2 ${
+            rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-orange-500 text-white border-yellow-300 shadow-yellow-500/50' :
+            rank === 2 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-white border-gray-200 shadow-gray-400/50' :
+            rank === 3 ? 'bg-gradient-to-br from-orange-400 to-red-500 text-white border-orange-300 shadow-orange-500/50' :
+            'bg-gradient-to-br from-slate-400 to-gray-600 text-white border-slate-300 shadow-slate-500/50'
           }`}>
             {rank}
           </div>
         </div>
       )}
       
-      <div className="relative p-6 z-10">
+      <div className="relative p-8 z-10">
         <div className="flex items-start justify-between mb-6">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent tracking-wide">
+          <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent tracking-wide">
             {film.film_id}
           </h3>
-          <span className="text-xs font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/30 backdrop-blur-sm">
+          <span className="text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg">
             {film.center}
           </span>
         </div>
         
-        <div className="mb-6">
+        <div className="mb-8">
           <a
             href={film.dc_film_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-all duration-300 group/link"
+            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-all duration-300 group/link font-medium"
           >
-            <ExternalLink className="w-4 h-4 group-hover/link:scale-110 group-hover/link:rotate-12 transition-transform duration-300" />
-            <span className="text-sm font-medium">Watch Film</span>
+            <ExternalLink className="w-5 h-5 group-hover/link:scale-110 group-hover/link:rotate-12 transition-transform duration-300" />
+            <span>Watch Film</span>
           </a>
         </div>
 
         {showResults && (
-          <div className="mb-6 space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Star className="w-4 h-4 text-yellow-400" />
-                <span className="text-gray-300 text-sm">Votes: {film.votes}</span>
+          <div className="mb-8 space-y-4">
+            <div className="flex items-center justify-between bg-gray-50/80 backdrop-blur-sm rounded-2xl p-4">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
+                  <Star className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-700 font-medium">Votes: {film.votes}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Heart className="w-4 h-4 text-pink-400" />
-                <span className="text-gray-300 text-sm">Favorites: {film.favorites}</span>
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl">
+                  <Heart className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-700 font-medium">Favorites: {film.favorites}</span>
               </div>
             </div>
           </div>
         )}
 
         {!showResults && (
-          <div className="flex space-x-3">
+          <div className="flex space-x-4">
             <button
               onClick={() => onVote(film.id)}
               disabled={hasVoted}
-              className={`flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              className={`flex-1 flex items-center justify-center space-x-3 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg ${
                 hasVoted
-                  ? 'bg-gradient-to-r from-emerald-500 to-green-500 text-white cursor-not-allowed shadow-lg shadow-emerald-500/30'
-                  : 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transform hover:scale-105 active:scale-95'
+                  ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white cursor-not-allowed shadow-emerald-500/30'
+                  : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 text-white shadow-blue-500/30 hover:shadow-blue-500/50 transform hover:scale-105 active:scale-95'
               }`}
             >
               <Star className="w-5 h-5" />
@@ -93,10 +97,10 @@ const FilmCard: React.FC<FilmCardProps> = ({
             
             <button
               onClick={() => onToggleFavorite(film.id)}
-              className={`px-4 py-3 rounded-xl transition-all duration-300 shadow-lg ${
+              className={`px-6 py-4 rounded-2xl transition-all duration-300 shadow-lg ${
                 isFavorited
                   ? 'bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-400 hover:to-red-400 text-white shadow-pink-500/30 hover:shadow-pink-500/50'
-                  : 'bg-slate-700/50 hover:bg-slate-600/50 text-gray-300 hover:text-white backdrop-blur-sm border border-white/10 hover:border-pink-400/30'
+                  : 'bg-gray-100/80 hover:bg-gray-200/80 text-gray-600 hover:text-gray-800 backdrop-blur-sm border border-gray-200/50 hover:border-pink-300/50'
               } transform hover:scale-105 active:scale-95`}
             >
               <Heart className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
