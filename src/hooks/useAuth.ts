@@ -29,10 +29,12 @@ export const useAuth = () => {
 
   const adminSignIn = async (email: string, password: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-auth`, {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const response = await fetch(`${supabaseUrl}/functions/v1/admin-auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
         body: JSON.stringify({ email, password }),
       });
@@ -45,6 +47,9 @@ export const useAuth = () => {
           id: 'admin-user',
           email: 'admin@gmail.com',
           user_metadata: { full_name: 'Administrator' },
+          app_metadata: {},
+          aud: 'authenticated',
+          created_at: new Date().toISOString(),
         } as User;
         
         setUser(adminUser);
@@ -54,9 +59,11 @@ export const useAuth = () => {
         return { data: null, error: { message: result.error || 'Invalid credentials' } };
       }
     } catch (error) {
+      console.error('Admin login error:', error);
       return { data: null, error: { message: 'Connection error' } };
     }
   };
+
   const signIn = async (email: string, password: string) => {
     // Check if this is an admin login attempt
     if (email === 'admin@gmail.com') {

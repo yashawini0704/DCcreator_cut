@@ -34,12 +34,19 @@ Deno.serve(async (req: Request) => {
     const ADMIN_EMAIL = "admin@gmail.com";
     const ADMIN_PASSWORD = "admin123";
 
+    console.log('Admin login attempt:', { email, passwordLength: password?.length });
+
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      console.log('Admin login successful');
       return new Response(
         JSON.stringify({ 
           success: true, 
           isAdmin: true,
-          user: { email: ADMIN_EMAIL, id: "admin-user" }
+          user: { 
+            email: ADMIN_EMAIL, 
+            id: "admin-user",
+            full_name: "Administrator"
+          }
         }),
         {
           status: 200,
@@ -47,6 +54,7 @@ Deno.serve(async (req: Request) => {
         }
       );
     } else {
+      console.log('Admin login failed - invalid credentials');
       return new Response(
         JSON.stringify({ 
           success: false, 
@@ -59,6 +67,7 @@ Deno.serve(async (req: Request) => {
       );
     }
   } catch (error) {
+    console.error('Admin auth error:', error);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
       {
