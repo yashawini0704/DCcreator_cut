@@ -1,7 +1,7 @@
 import React from 'react';
 import { Film as FilmIcon, Music, Users, Heart } from 'lucide-react';
-import FilmCard from './FilmCard';
-import SongCard from './SongCard';
+import FilmCard from './components/FilmCard';
+import SongCard from './components/SongCard';
 import { Film, Song, UserVotes, UserFavorites } from '../types';
 
 interface VotingPageProps {
