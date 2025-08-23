@@ -8,16 +8,11 @@ interface HeaderProps {
   onViewChange: (view: 'voting' | 'results') => void;
   user: UserType | null;
   isAdmin: boolean;
-  onAuthClick: () => void;
+  onLogin: () => void;
+  onLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, isAdmin, onAuthClick }) => {
-  const { signOut } = useAuth();
-
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
+const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, isAdmin, onLogin, onLogout }) => {
 
   return (
     <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-lg">
@@ -69,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, isAdmi
                   <span className="text-sm text-gray-700 font-medium">{user.email}</span>
                 </div>
                 <button
-                  onClick={handleSignOut}
+                  onClick={onLogout}
                   className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100/80 backdrop-blur-sm rounded-lg transition-all duration-300"
                 >
                   <LogOut className="w-4 h-4" />
@@ -78,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, isAdmi
               </div>
             ) : (
               <button
-                onClick={onAuthClick}
+                onClick={onLogin}
                 className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 transform hover:scale-105"
               >
                 Sign In
