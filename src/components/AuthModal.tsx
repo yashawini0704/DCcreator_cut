@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, User, Lock, Mail } from 'lucide-react';
+import { X, User, Lock, Mail, MapPin } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 interface AuthModalProps {
@@ -12,6 +12,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [center, setCenter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { signIn, signUp } = useAuth();
@@ -26,7 +27,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     try {
       let result;
       if (isSignUp) {
-        result = await signUp(email, password, fullName);
+        result = await signUp(email, password, fullName, center);
       } else {
         result = await signIn(email, password);
       }
@@ -38,6 +39,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         setEmail('');
         setPassword('');
         setFullName('');
+        setCenter('');
         setError('');
       }
     } catch (err: any) {
@@ -52,6 +54,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     setEmail('');
     setPassword('');
     setFullName('');
+    setCenter('');
     setError('');
   };
 
@@ -92,6 +95,29 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter your full name"
                   required
                 />
+              </div>
+            </div>
+          )}
+
+          {isSignUp && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Center
+              </label>
+              <div className="relative">
+                <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <select
+                  value={center}
+                  onChange={(e) => setCenter(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white/90 border border-gray-200/50 rounded-2xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm appearance-none"
+                  required
+                >
+                  <option value="">Select your center</option>
+                  <option value="TNP">TNP</option>
+                  <option value="KOLLU">KOLLU</option>
+                  <option value="KAUP">KAUP</option>
+                  <option value="VPM">VPM</option>
+                </select>
               </div>
             </div>
           )}
