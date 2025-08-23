@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange, user, isAdmi
                 <Music className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-wide">DC Creator Cut</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-wide">DC Creator's cut</h1>
           </div>
           
           <nav className="flex space-x-4">
