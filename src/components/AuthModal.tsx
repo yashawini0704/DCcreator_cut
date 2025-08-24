@@ -37,7 +37,15 @@ const AuthModal: React.FC<AuthModalProps> = ({ onLogin, onClose }) => {
           setError('');
         }
       } else {
-        await onLogin(email, password);
+        const result = await signIn(email, password);
+        if (result.error) {
+          setError(result.error.message);
+        } else {
+          onClose();
+          setEmail('');
+          setPassword('');
+          setError('');
+        }
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred');
@@ -114,6 +122,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ onLogin, onClose }) => {
                   <option value="KOLLU">KOLLU</option>
                   <option value="KAUP">KAUP</option>
                   <option value="VPM">VPM</option>
+                  <option value="CHENNAI">CHENNAI</option>
+                  <option value="REMOTE">REMOTE</option>
                 </select>
               </div>
             </div>

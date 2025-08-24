@@ -85,17 +85,42 @@ export const useAuth = () => {
   };
 
   const signUp = async (email: string, password: string, fullName?: string, center?: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-          center: center,
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            center: center,
+          },
         },
-      },
-    });
-    return { data, error };
+      });
+      
+      if (error) {
+        return { data: null, error };
+      }
+      
+      // If signup successful, create profile
+      if (data.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert({
+            id: data.user.id,
+            email: data.user.email,
+            full_name: fullName,
+            center: center || '',
+          });
+        
+        if (profileError) {
+          console.error('Profile creation error:', profileError);
+        }
+      }
+      
+      return { data, error: null };
+    } catch (error: any) {
+      return { data: null, error: { message: error.message } };
+    }
   };
 
   const signOut = async () => {
