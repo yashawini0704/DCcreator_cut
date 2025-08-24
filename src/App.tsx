@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   const handleLogin = async (email: string, password: string) => {
     try {
-      await login(email, password);
+      await signIn(email, password);
       setShowAuthModal(false);
     } catch (error) {
       throw error; // Re-throw to let AuthModal handle the error display
@@ -33,7 +33,7 @@ const App: React.FC = () => {
   };
 
   const handleLogout = () => {
-    logout();
+    signOut();
     setCurrentView('voting');
   };
 

@@ -3,11 +3,11 @@ import { X, User, Lock, Mail, MapPin } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 interface AuthModalProps {
+  onLogin: (email: string, password: string) => Promise<void>;
   isOpen: boolean;
-  onClose: () => void;
 }
 
-const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
+const AuthModal: React.FC<AuthModalProps> = ({ onLogin, onClose }) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,8 +16,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { signIn, signUp } = useAuth();
-
-  if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,19 +26,18 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       let result;
       if (isSignUp) {
         result = await signUp(email, password, fullName, center);
+        if (result.error) {
+          setError(result.error.message);
+        } else {
+          onClose();
+          setEmail('');
+          setPassword('');
+          setFullName('');
+          setCenter('');
+          setError('');
+        }
       } else {
-        result = await signIn(email, password);
-      }
-
-      if (result.error) {
-        setError(result.error.message);
-      } else {
-        onClose();
-        setEmail('');
-        setPassword('');
-        setFullName('');
-        setCenter('');
-        setError('');
+        await onLogin(email, password);
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred');

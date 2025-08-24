@@ -101,6 +101,8 @@ export const useAuth = () => {
     user,
     isAdmin,
     loading,
+    login: signIn,
+    logout: signOut,
     signIn,
     signUp,
     signOut,
