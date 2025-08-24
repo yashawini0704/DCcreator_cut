@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   const handleLogin = async (email: string, password: string) => {
     try {
-      const result = await signIn(email, password);
+      const result = await login(email, password);
       if (result.error) {
         throw new Error(result.error.message);
       }
@@ -36,7 +36,7 @@ const App: React.FC = () => {
   };
 
   const handleLogout = () => {
-    signOut();
+    logout();
     setCurrentView('voting');
   };
 
