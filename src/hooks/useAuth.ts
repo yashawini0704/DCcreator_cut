@@ -67,13 +67,20 @@ export const useAuth = () => {
   const signIn = async (email: string, password: string) => {
     // Check if this is an admin login attempt
     if (email === 'admin@gmail.com') {
-      return adminSignIn(email, password);
+      const result = await adminSignIn(email, password);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+      return result;
     }
     
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+    if (error) {
+      throw new Error(error.message);
+    }
     return { data, error };
   };
 

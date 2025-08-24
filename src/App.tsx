@@ -25,7 +25,10 @@ const App: React.FC = () => {
 
   const handleLogin = async (email: string, password: string) => {
     try {
-      await signIn(email, password);
+      const result = await signIn(email, password);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
       setShowAuthModal(false);
     } catch (error) {
       throw error; // Re-throw to let AuthModal handle the error display
