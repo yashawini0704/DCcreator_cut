@@ -190,8 +190,10 @@ export const useVoting = (userId: string | undefined) => {
     userVotes,
     userFavorites,
     loading,
-    voteForItem,
-    toggleFavorite,
+    voteForFilm: (filmId: string) => voteForItem('film', filmId),
+    voteForSong: (songId: string) => voteForItem('song', songId),
+    toggleFilmFavorite: (filmId: string) => toggleFavorite('film', filmId),
+    toggleSongFavorite: (songId: string) => toggleFavorite('song', songId),
     refetch: () => Promise.all([fetchData(), fetchUserData()]),
   };
 };

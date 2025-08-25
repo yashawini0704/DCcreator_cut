@@ -21,7 +21,7 @@ const App: React.FC = () => {
     toggleFilmFavorite,
     toggleSongFavorite,
     loading
-  } = useVoting(user);
+  } = useVoting(user?.id);
 
   const handleLogin = async (email: string, password: string) => {
     try {
