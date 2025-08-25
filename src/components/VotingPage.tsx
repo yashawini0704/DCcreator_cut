@@ -94,7 +94,7 @@ const VotingPage: React.FC<VotingPageProps> = ({
             <FilmCard
               key={film.id}
               film={film}
-              hasVoted={userVotes.films.has(film.id)}
+              hasVoted={hasVotedForFilm}
               isFavorited={userFavorites.films.has(film.id)}
               onVote={onVoteFilm}
               onToggleFavorite={onToggleFilmFavorite}
@@ -120,7 +120,7 @@ const VotingPage: React.FC<VotingPageProps> = ({
             <SongCard
               key={song.id}
               song={song}
-              hasVoted={userVotes.songs.has(song.id)}
+              hasVoted={hasVotedForSong}
               isFavorited={userFavorites.songs.has(song.id)}
               onVote={onVoteSong}
               onToggleFavorite={onToggleSongFavorite}
