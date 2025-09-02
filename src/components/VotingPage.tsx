@@ -15,6 +15,8 @@ interface VotingPageProps {
   onToggleSongFavorite: (songId: string) => void;
 }
 
+
+
 const VotingPage: React.FC<VotingPageProps> = ({
   films,
   songs,
